@@ -1,8 +1,8 @@
 broker.id={{ hostvars[inventory_hostname].broker_id }}
 
 listeners={{ kafka_listeners }}
-advertised.listeners={{ kafka_advertised_listener_protocol }}://{{ ansible_host }}:{{ kafka_tls_port }}
-listener.security.protocol.map=SSL:SSL
+advertised.listeners=PLAINTEXT://{{ ansible_host }}:{{ kafka_plain_port }},{{ kafka_advertised_listener_protocol }}://{{ ansible_host }}:{{ kafka_tls_port }}
+listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL
 inter.broker.listener.name=SSL
 
 num.network.threads=3
@@ -22,6 +22,7 @@ default.replication.factor={{ kafka_replication_factor }}
 
 zookeeper.connect={% for host in groups['zookeeper'] %}
 {{ hostvars[host].ansible_host }}:{{ zookeeper_client_port }}{% if not loop.last %},{% endif %}{% endfor %}
+
 zookeeper.connection.timeout.ms=18000
 
 ssl.keystore.location={{ certs_dir }}/{{ inventory_hostname }}.p12
@@ -30,7 +31,7 @@ ssl.key.password=changeit
 ssl.truststore.location={{ certs_dir }}/truststore.p12
 ssl.truststore.password=changeit
 ssl.client.auth=none
-security.inter.broker.protocol=SSL
+#security.inter.broker.protocol=SSL
 ssl.endpoint.identification.algorithm=
 
 auto.create.topics.enable=true

@@ -41,6 +41,7 @@ firewalld_zookeeper_ports:
 
 firewalld_kafka_ports:
   - "{{ kafka_tls_port }}/tcp"
+  - "{{ kafka_plain_port }}/tcp"
 
 selinux_state: enforcing
 

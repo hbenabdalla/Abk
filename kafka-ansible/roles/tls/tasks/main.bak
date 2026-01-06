@@ -85,8 +85,7 @@
   ansible.builtin.command: >
     openssl req -new
     -key {{ certs_dir }}/{{ inventory_hostname }}.key
-    -subj "/CN={{ fqdn }}"
-    -addext "subjectAltName = DNS:{{ inventory_hostname }}, DNS:{{ fqdn }}, IP:{{ ansible_host }}"
+    -subj "/CN={{ ansible_host }}"
     -out {{ certs_dir }}/{{ inventory_hostname }}.csr
   args:
     creates: "{{ certs_dir }}/{{ inventory_hostname }}.csr"
