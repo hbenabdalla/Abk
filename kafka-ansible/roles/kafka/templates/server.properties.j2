@@ -1,9 +1,9 @@
 broker.id={{ hostvars[inventory_hostname].broker_id }}
 
 listeners={{ kafka_listeners }}
-advertised.listeners=PLAINTEXT://{{ ansible_host }}:{{ kafka_plain_port }},{{ kafka_advertised_listener_protocol }}://{{ ansible_host }}:{{ kafka_tls_port }}
-listener.security.protocol.map=PLAINTEXT:PLAINTEXT,SSL:SSL
-inter.broker.listener.name=SSL
+advertised.listeners=PLAINTEXT://{{ ansible_host }}:{{ kafka_plain_port }}
+listener.security.protocol.map=PLAINTEXT:PLAINTEXT
+inter.broker.listener.name=PLAINTEXT
 
 num.network.threads=3
 num.io.threads=8
@@ -25,13 +25,13 @@ zookeeper.connect={% for host in groups['zookeeper'] %}
 
 zookeeper.connection.timeout.ms=18000
 
-ssl.keystore.location={{ certs_dir }}/{{ inventory_hostname }}.p12
-ssl.keystore.password=changeit
-ssl.key.password=changeit
-ssl.truststore.location={{ certs_dir }}/truststore.p12
-ssl.truststore.password=changeit
-ssl.client.auth=none
+#ssl.keystore.location={{ certs_dir }}/{{ inventory_hostname }}.p12
+#ssl.keystore.password=changeit
+#ssl.key.password=changeit
+#ssl.truststore.location={{ certs_dir }}/truststore.p12
+#ssl.truststore.password=changeit
+#ssl.client.auth=none
 #security.inter.broker.protocol=SSL
-ssl.endpoint.identification.algorithm=
+#ssl.endpoint.identification.algorithm=
 
 auto.create.topics.enable=true

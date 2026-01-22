@@ -2,8 +2,8 @@ port {{ sentinel_port }}
 {% set master_host = groups['masters'][0] %}
 {% set master_ip = hostvars[master_host].ansible_host %}
 
-sentinel monitor mymaster {{ master_ip }} {{ redis_port }} {{ redis_quorum }}
-sentinel auth-pass mymaster {{ sentinel_auth_pass }}
-sentinel down-after-milliseconds mymaster 5000
-sentinel failover-timeout mymaster {{ failover_timeout_ms }}
-sentinel parallel-syncs mymaster 1
+sentinel monitor mymasteruae {{ master_ip }} {{ redis_port }} {{ redis_quorum }}
+sentinel auth-pass mymasteruae {{ sentinel_auth_pass }}
+sentinel down-after-milliseconds mymasteruae 5000
+sentinel failover-timeout mymasteruae {{ failover_timeout_ms }}
+sentinel parallel-syncs mymasteruae 1

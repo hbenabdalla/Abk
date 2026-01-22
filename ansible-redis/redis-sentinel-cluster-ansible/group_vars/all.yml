@@ -1,5 +1,5 @@
 redis_port: 6379
-sentinel_port: 26379
+sentinel_port: 26380
 
 redis_requirepass: "Str0ngRedisPass!"
 redis_masterauth: "Str0ngRedisPass!"
